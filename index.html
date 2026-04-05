@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALDS Pizzaria Delivery</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="#home" class="logo-link">
+        <div class="logo-wrap logo-wrap--header">
+          <img src="imagem_logo.jpeg" alt="ALDS Pizzaria Delivery" />
+        </div>
+      </a>
+      <nav>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Início</a></li>
+          <li><a href="#cardapio">Cardápio</a></li>
+          <li><a href="#pedido">Faça seu Pedido</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#pedido" class="btn-nav">Faça seu Pedido</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- BANNER / HERO -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge">Delivery & Retirada</span>
+      <h1>A Pizza Mais Gostosa<br />da Cidade</h1>
+      <p>Massa artesanal, ingredientes frescos e muito sabor em cada fatia.</p>
+      <div class="hero-buttons">
+        <a href="#cardapio" class="btn-primary">Ver Cardápio</a>
+        <a href="#pedido" class="btn-secondary">Pedir Agora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTAQUES -->
+  <section class="features">
+    <div class="container">
+      <div class="feature-card">
+        <span class="feature-icon">🍕</span>
+        <h3>Massa Artesanal</h3>
+        <p>Preparada diariamente com farinha selecionada</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🚀</span>
+        <h3>Entrega Rápida</h3>
+        <p>Sua pizza quentinha em até 40 minutos</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🌿</span>
+        <h3>Ingredientes Frescos</h3>
+        <p>Selecionados todos os dias para garantir qualidade</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⭐</span>
+        <h3>Alta Avaliação</h3>
+        <p>Mais de 500 clientes satisfeitos nos avaliaram</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDÁPIO -->
+  <section class="cardapio" id="cardapio">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">O que temos</span>
+        <h2>Nosso Cardápio</h2>
+        <p>Escolha sua favorita entre nossas deliciosas opções</p>
+      </div>
+
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn" data-filter="classica">Clássicas</button>
+        <button class="filter-btn" data-filter="especial">Especiais</button>
+        <button class="filter-btn" data-filter="doce">Doces</button>
+      </div>
+
+      <!-- Cards gerados dinamicamente pelo script.js via localStorage -->
+      <div class="pizza-grid" id="pizzaGrid"></div>
+    </div>
+  </section>
+
+  <!-- PEDIDO -->
+  <section class="pedido" id="pedido">
+    <div class="container">
+      <div class="section-header light">
+        <span class="section-label gold">Faça seu pedido</span>
+        <h2>Pronto para Pedir?</h2>
+        <p>Preencha seus dados e entraremos em contato para confirmar</p>
+      </div>
+
+      <div class="pedido-wrapper">
+        <div class="carrinho" id="carrinho">
+          <h3>🛒 Seu Pedido</h3>
+          <ul id="carrinhoLista">
+            <li class="carrinho-vazio">Nenhum item adicionado ainda.</li>
+          </ul>
+          <div class="carrinho-total" id="carrinhoTotal" style="display:none">
+            <span>Total:</span>
+            <span id="totalValor">R$ 0,00</span>
+          </div>
+        </div>
+
+        <form class="pedido-form" id="pedidoForm" onsubmit="enviarPedido(event)">
+          <div class="form-group">
+            <label for="nome">Seu Nome</label>
+            <input type="text" id="nome" placeholder="Ex: João Silva" required />
+          </div>
+          <div class="form-group">
+            <label for="telefone">WhatsApp / Telefone</label>
+            <input type="tel" id="telefone" placeholder="(11) 99999-9999" required maxlength="15" autocomplete="tel" />
+            <span id="telefoneErro" style="display:none;color:#e74c3c;font-size:.82rem;margin-top:2px;"></span>
+          </div>
+          <div class="form-group">
+            <label for="endereco">Endereço de Entrega</label>
+            <input type="text" id="endereco" placeholder="Rua, número, bairro" />
+          </div>
+          <div class="form-group">
+            <label for="obs">Observações</label>
+            <textarea id="obs" rows="3" placeholder="Sem cebola, ponto da massa, etc."></textarea>
+          </div>
+          <button type="submit" class="btn-primary full">Confirmar Pedido</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NÓS -->
+  <section class="sobre" id="sobre">
+    <div class="container sobre-inner">
+      <div class="sobre-img">
+        <div class="sobre-blob">
+          <div class="logo-wrap logo-wrap--blob">
+            <img src="imagem_logo.jpeg" alt="ALDS Pizzaria" />
+          </div>
+        </div>
+      </div>
+      <div class="sobre-texto">
+        <span class="section-label">Nossa História</span>
+        <h2>Sobre a ALDS Pizzaria</h2>
+        <p>
+          A ALDS Pizzaria nasceu da paixão por pizza de verdade — aquela de massa fininha, recheio generoso e sabor que fica na memória.
+          Fundada por amantes da boa gastronomia, nossa missão é levar felicidade em cada caixa que sai pela nossa porta.
+        </p>
+        <p>
+          Trabalhamos com ingredientes selecionados, massa fermentada artesanalmente e molho de tomate feito na hora.
+          Cada pizza é um ato de carinho para quem vai receber.
+        </p>
+        <ul class="sobre-lista">
+          <li>✅ Mais de 3 anos servindo a cidade</li>
+          <li>✅ Ingredientes frescos todos os dias</li>
+          <li>✅ Atendimento de segunda a domingo</li>
+          <li>✅ Delivery e retirada no local</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVALIAÇÕES -->
+  <section class="avaliacoes" id="avaliacoes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">O que dizem</span>
+        <h2>Avaliações dos Clientes</h2>
+        <p>Veja o que nossos clientes estão falando</p>
+      </div>
+
+      <div class="avaliacoes-grid" id="avaliacoesGrid">
+        <!-- Populado por script.js -->
+      </div>
+
+      <div class="avaliacao-form-wrap">
+        <h3>Deixe sua avaliação</h3>
+        <form id="avaliacaoForm" onsubmit="salvarAvaliacao(event)">
+          <div class="estrelas-container">
+            <p class="estrelas-label">Sua nota:</p>
+            <div class="estrelas" id="estrelasInput">
+              <span class="estrela" data-valor="1">★</span>
+              <span class="estrela" data-valor="2">★</span>
+              <span class="estrela" data-valor="3">★</span>
+              <span class="estrela" data-valor="4">★</span>
+              <span class="estrela" data-valor="5">★</span>
+            </div>
+            <input type="hidden" id="notaAvaliacao" value="0" />
+          </div>
+          <div class="form-group">
+            <label for="nomeAvaliador">Seu nome</label>
+            <input type="text" id="nomeAvaliador" placeholder="Ex: Maria Silva" required />
+          </div>
+          <div class="form-group">
+            <label for="comentarioAvaliacao">Comentário (opcional)</label>
+            <textarea id="comentarioAvaliacao" rows="3" placeholder="Como foi sua experiência?"></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Enviar Avaliação</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo-wrap logo-wrap--footer">
+          <img src="imagem_logo.jpeg" alt="ALDS Pizzaria" />
+        </div>
+        <p>ALDS Pizzaria Delivery<br />Sabor que chega até você.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#home">Início</a></li>
+          <li><a href="#cardapio">Cardápio</a></li>
+          <li><a href="#pedido">Faça seu Pedido</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#avaliacoes">Avaliações dos Clientes</a></li>
+        </ul>
+      </div>
+      <div class="footer-contato">
+        <h4>Contato</h4>
+        <p>📞 (11) 92426-8584</p>
+        <p>📍 Av. Dalva de Oliveira, 55</p>
+        <p>🕐 Seg–Dom: 18h às 23h</p>
+        <a href="admin.html" class="admin-link">⚙️ Área Administrativa</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 ALDS Pizzaria Delivery. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL DE CONFIRMAÇÃO -->
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <span class="modal-icon">🎉</span>
+      <h3>Pedido Recebido!</h3>
+      <p id="modalMensagem">Obrigado! Em breve entraremos em contato para confirmar seu pedido.</p>
+      <button class="btn-primary" onclick="fecharModal()">Fechar</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
