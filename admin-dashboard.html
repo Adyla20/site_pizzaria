@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin — ALDS Pizzaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- Overlay para fechar sidebar no mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <img src="imagem_logo.jpeg" alt="ALDS" class="sidebar-logo" />
+        <span class="sidebar-title">ALDS Admin</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn active" data-tab="pizzas" onclick="trocarTab('pizzas', this)">
+          🍕 Pizzas
+          <span class="badge" id="badgePizzas">0</span>
+        </button>
+        <button class="sidebar-btn" data-tab="pedidos" onclick="trocarTab('pedidos', this)">
+          📦 Pedidos
+          <span class="badge badge-orange" id="badgePedidos">0</span>
+        </button>
+        <button class="sidebar-btn" data-tab="avaliacoes" onclick="trocarTab('avaliacoes', this)">
+          ⭐ Avaliações
+          <span class="badge badge-purple" id="badgeAvaliacoes">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" class="sidebar-btn sidebar-link">🌐 Ver Site</a>
+        <button class="sidebar-btn sidebar-logout" onclick="logout()">🚪 Sair</button>
+      </div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="admin-content">
+
+      <!-- TOP BAR -->
+      <div class="admin-topbar">
+        <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+        <h2 class="topbar-title" id="topbarTitle">Pizzas</h2>
+        <span class="topbar-user">👤 Administrador</span>
+      </div>
+
+      <!-- TAB: PIZZAS -->
+      <div class="tab-panel active" id="tab-pizzas">
+        <div class="panel-header">
+          <h2>Gerenciar Pizzas</h2>
+          <button class="btn-admin-primary" onclick="abrirFormPizza()">+ Nova Pizza</button>
+        </div>
+        <div id="pizzasContainer"></div>
+      </div>
+
+      <!-- TAB: PEDIDOS -->
+      <div class="tab-panel" id="tab-pedidos">
+        <div class="panel-header">
+          <h2>Pedidos Recebidos</h2>
+          <button class="btn-admin-outline" onclick="limparPedidos()">🗑 Limpar Todos</button>
+        </div>
+        <div id="pedidosContainer"></div>
+      </div>
+
+      <!-- TAB: AVALIAÇÕES -->
+      <div class="tab-panel" id="tab-avaliacoes">
+        <div class="panel-header">
+          <h2>Avaliações dos Clientes</h2>
+          <button class="btn-admin-outline" onclick="limparAvaliacoes()">🗑 Limpar Todas</button>
+        </div>
+        <div id="avaliacoesContainer"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL: FORMULÁRIO DE PIZZA -->
+  <div class="admin-modal" id="modalPizza">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 id="formPizzaTitulo">Nova Pizza</h3>
+        <button class="modal-close" onclick="fecharFormPizza()">✕</button>
+      </div>
+      <form id="formPizza" onsubmit="salvarPizza(event)">
+        <input type="hidden" id="pizzaId" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pizzaNome">Nome *</label>
+            <input type="text" id="pizzaNome" placeholder="Ex: Margherita" required />
+          </div>
+          <div class="form-group">
+            <label for="pizzaCategoria">Categoria *</label>
+            <select id="pizzaCategoria" required>
+              <option value="">Selecione...</option>
+              <option value="classica">Clássica</option>
+              <option value="especial">Especial</option>
+              <option value="doce">Doce</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pizzaPreco">Preço (R$) *</label>
+            <input type="number" id="pizzaPreco" placeholder="0.00" step="0.01" min="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="pizzaImagem">URL da Imagem (opcional)</label>
+            <input type="url" id="pizzaImagem" placeholder="https://..." oninput="previewImagem()" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pizzaDescricao">Descrição *</label>
+          <textarea id="pizzaDescricao" rows="3" placeholder="Ingredientes e detalhes da pizza..." required></textarea>
+        </div>
+
+        <div class="img-preview-wrap" id="imgPreviewWrap">
+          <img id="imgPreview" src="" alt="Preview da imagem" />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-admin-outline" onclick="fecharFormPizza()">Cancelar</button>
+          <button type="submit" class="btn-admin-primary">💾 Salvar Pizza</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

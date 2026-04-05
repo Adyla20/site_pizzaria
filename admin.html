@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — ALDS Pizzaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https:// 
+  .googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-login-page">
+
+  <div class="login-card">
+    <img src="imagem_logo.jpeg" alt="ALDS Pizzaria" class="login-logo" />
+    <h1>Área Administrativa</h1>
+    <p class="login-subtitle">ALDS Pizzaria Delivery</p>
+
+    <div class="login-error" id="loginError" style="display:none">
+      ❌ Email ou senha incorretos. Tente novamente.
+    </div>
+
+    <form id="loginForm" onsubmit="loginAdmin(event)">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="adylaiasmiim811@gmail.com" autocomplete="email" required />
+      </div>
+      <div class="form-group">
+        <label for="loginSenha">Senha</label>
+        <div class="input-senha-wrap">
+          <input type="password" id="loginSenha" placeholder="••••••••" autocomplete="current-password" required />
+          <button type="button" class="toggle-senha" onclick="toggleSenha()" title="Mostrar/ocultar senha">👁</button>
+        </div>
+      </div>
+      <button type="submit" class="btn-login" id="btnLogin">Entrar no Painel</button>
+    </form>
+
+    <a href="index.html" class="back-link">← Voltar ao site</a>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
